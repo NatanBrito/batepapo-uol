@@ -2,17 +2,33 @@ let nomeUsuario=prompt("digite seu nickname");
 let enviandoNome = {
     name:nomeUsuario
 }
+
+
 console.log(enviandoNome);
+const testRequest = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+testRequest.then(infoData);
+let data;
+function infoData(promisse){
+  data= promisse.data
+    console.log(data.length);
+}
 
 
-function addMessages (){
+let input= document.querySelector("input");
+inputMessage= input.value;
+function addMyMessages (){
+    sendMyMessage();
     const containerMessages= document.querySelector(".allMessages")
     messageHtml= ` 
-    <div class="message">
-    <img src="./img/logo 1.png">
-    <img src="./img/logo 1.png">
-</div>
-`
-containerMessages.innerHTML+= messageHtml;
+    <div class="message"><span>de <b>${enviandoNome.name}</b>: ${inputMessage}</span>
+    </div>
+    `
+    containerMessages.innerHTML+= messageHtml;
+    // messageHtml.scrollIntoView();
+inputMessage="";
+
 }
-console.log("oi");
+function sendMyMessage(){
+    let input= document.querySelector("input");
+    inputMessage= input.value;
+}

@@ -2,10 +2,8 @@
     box-sizing: border-box;
 }
 
-body {
-    width: 390px;
-    height: 100%;
-    background-color: #E5E5E5;
+ body {
+background-color: gray;
 }
 
 header {
@@ -61,26 +59,32 @@ input {
 }
 
 .allMessages {
-    display:column;
     width:390px;
-    height: 100%;
-   background-color: aqua;
+    height:800px;
+    background-color: #E5E5E5;
+    display: flex;
+    flex-direction: column;
 }
-.message img{
-    margin-top: 100px;
+.margin{
     margin-top: 100px;
 
-    width: 100%;
-    height:40px;
 }
 
-.message {
-    margin-top: 100px;
-    width: 100%;
-    height:40px;
+.message{
+
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    width: 390px;
+    height: 40px;
+    margin-top: 4px;
+}
+.message span{
+    padding:0px 8px;
 }
 
 
 .testandoMargin{
 background-color: red;
+margin-top: 100px;
 }
