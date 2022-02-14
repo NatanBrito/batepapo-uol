@@ -2,10 +2,9 @@ let data;
 let enviandoNome;
 let testinhoMarotinho;
 validandoNome();
-
 function validandoNome() {
 
-    let nomeUsuario = prompt("digite seu nickname");
+    let  nomeUsuario = prompt("digite seu nickname");
     enviandoNome = {
         name: nomeUsuario
     }
@@ -27,9 +26,11 @@ function validandoNome() {
         sendName.catch(fail);
     }
 }
+
 setInterval(timerConexao, 3000)
 
 function timerConexao() {
+    
     enviandoNome = {
     name: nomeUsuario
     }
@@ -41,46 +42,40 @@ testRequest.then(infoData);
 
 function infoData(promisse) {
     data = promisse.data;
-    console.log(data.from);
     addApiMessage();
 }
 
 
-let input = document.querySelector("input");
-let inputMessage = input.value;
-function addMyMessages() {
-    sendMyMessage();
-    const containerMessages = document.querySelector(".allMessages")
-    messageHtml = ` 
-    <div class="message"><span>de <b>${enviandoNome.name}</b>: ${inputMessage}</span>
-    </div>
-    `
-    containerMessages.innerHTML += messageHtml;
 
-}
-function sendMyMessage() {
-    let input = document.querySelector("input");
-    inputMessage = input.value;
-}
+// function addMyMessages() {
+//     let input = document.querySelector("input");
+//     let inputMessage = input.value;
+//     const containerMessages = document.querySelector(".allMessages")
+//     messageHtml = ` 
+//     <div class="message"><span>de <b>${enviandoNome.name}</b>: ${inputMessage}</span>
+//     </div>
+//     `
+//     containerMessages.innerHTML += messageHtml;
+// }
 
 function addApiMessage() {
     for (let i = 0; i < data.length; i++) {
         const add = document.querySelector(".allMessages")
         if (data[i].type === "status") {
             add.innerHTML += ` 
-        <div class="message status"><span> (${data[i].time}) de <strong class=nomeForte>${data[i].from}</strong> para  <strong class=nomeForte>${data[i].to}</strong>: ${data[i].text} </span>
+        <div class="message status" data-identifier="message"><span> (${data[i].time}) de <strong class=nomeForte>${data[i].from}</strong> para  <strong class=nomeForte>${data[i].to}</strong>: ${data[i].text} </span>
         </div>
         `
         }
         else if (data[i].type === "private_message") {
             add.innerHTML += ` 
-       <div class="message private"><span> (${data[i].time}) de  <strong class=nomeForte>${data[i].from}</strong> para  <strong class=nomeForte>${data[i].to}</strong>: ${data[i].text} </span>
+       <div class="message private" data-identifier="message"><span> (${data[i].time}) de  <strong class=nomeForte>${data[i].from}</strong> para  <strong class=nomeForte>${data[i].to}</strong>: ${data[i].text} </span>
        </div>
        `
         }
         else {
             add.innerHTML += ` 
-        <div class="message"><span> (${data[i].time})  de  <strong class=nomeForte>${data[i].from}</strong> para  <strong class=nomeForte>${data[i].to}</strong>: ${data[i].text} </span>
+        <div class="message" data-identifier="message"><span> (${data[i].time})  de  <strong class=nomeForte>${data[i].from}</strong> para  <strong class=nomeForte>${data[i].to}</strong>: ${data[i].text} </span>
         </div>
         `
         }
@@ -88,12 +83,20 @@ function addApiMessage() {
     window.scrollTo(0, document.body.scrollHeight);
 }
 
-sendMyMessageApi = {
-    from: enviandoNome,
-    to: "todos",
+function addMyMessages(){
+    let input = document.querySelector("input");
+   let inputMessage = input.value;
+    if(inputMessage !== ""){
+
+ let myObjectMessage = {
+    from: input.value,
+    to: to,
     text: inputMessage,
-    type: "message",
-    time: "00:00:00"
+    type: type
+}
+}
+const promessa = axios.post('https://mock-api.driven.com.br/api/v4/uol/messages', myObjectMessage);
+promessa.then(xxx);
+clearInput();
 
 }
-
