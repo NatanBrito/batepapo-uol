@@ -1,7 +1,6 @@
 let data;
 let enviandoNome;
 let testinhoMarotinho;
-
 validandoNome();
 
 function validandoNome() {
@@ -10,15 +9,14 @@ function validandoNome() {
     enviandoNome = {
         name: nomeUsuario
     }
-
     let sendName = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants ", enviandoNome)
     sendName.then(sucess)
     sendName.catch(fail)
 
     function sucess() {
         alert("Belo apelido");
-        
     }
+
     function fail() {
         const nome = prompt("Digite outro nome pois este já está em uso");
         let nomeDado = {
@@ -28,16 +26,15 @@ function validandoNome() {
         sendName.then(sucess);
         sendName.catch(fail);
     }
-
 }
-// setInterval(timerConexao,3000)
+setInterval(timerConexao, 3000)
 
-//   timerConexao(){
-    
-
-//   }
-
-
+function timerConexao() {
+    enviandoNome = {
+    name: nomeUsuario
+    }
+    axios.post("https://mock-api.driven.com.br/api/v4/uol/participants ", enviandoNome)
+}
 
 const testRequest = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
 testRequest.then(infoData);
@@ -50,7 +47,7 @@ function infoData(promisse) {
 
 
 let input = document.querySelector("input");
-inputMessage = input.value;
+let inputMessage = input.value;
 function addMyMessages() {
     sendMyMessage();
     const containerMessages = document.querySelector(".allMessages")
@@ -59,7 +56,6 @@ function addMyMessages() {
     </div>
     `
     containerMessages.innerHTML += messageHtml;
-    inputMessage = "";
 
 }
 function sendMyMessage() {
@@ -72,23 +68,32 @@ function addApiMessage() {
         const add = document.querySelector(".allMessages")
         if (data[i].type === "status") {
             add.innerHTML += ` 
-        <div class="message status"><span> <b>(${data[i].time}) ${data[i].from}</b> para ${data[i].to}: ${data[i].text} </span>
+        <div class="message status"><span> (${data[i].time}) de <strong class=nomeForte>${data[i].from}</strong> para  <strong class=nomeForte>${data[i].to}</strong>: ${data[i].text} </span>
         </div>
         `
         }
         else if (data[i].type === "private_message") {
             add.innerHTML += ` 
-       <div class="message private"><span> <b>(${data[i].time}) ${data[i].from}</b> para ${data[i].to}: ${data[i].text} </span>
+       <div class="message private"><span> (${data[i].time}) de  <strong class=nomeForte>${data[i].from}</strong> para  <strong class=nomeForte>${data[i].to}</strong>: ${data[i].text} </span>
        </div>
        `
-
         }
         else {
             add.innerHTML += ` 
-        <div class="message"><span> <b>(${data[i].time}) ${data[i].from}</b> para ${data[i].to}: ${data[i].text} </span>
+        <div class="message"><span> (${data[i].time})  de  <strong class=nomeForte>${data[i].from}</strong> para  <strong class=nomeForte>${data[i].to}</strong>: ${data[i].text} </span>
         </div>
         `
         }
     }
     window.scrollTo(0, document.body.scrollHeight);
 }
+
+sendMyMessageApi = {
+    from: enviandoNome,
+    to: "todos",
+    text: inputMessage,
+    type: "message",
+    time: "00:00:00"
+
+}
+
