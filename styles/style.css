@@ -85,12 +85,6 @@ input {
 .message span{
     padding:0px 8px;
 }
-
-
-.testandoMargin{
-background-color: red;
-margin-top: 100px;
-}
 .status{
     background: #dcdcdc;
 }
